@@ -2,39 +2,7 @@
 
 LuxeyFRS is a responsive web application designed for renting premium apparel and fashion accessories. The client application offers tailored user experiences for both regular Customers and administrative staff, managing catalogs, inventories, user authentications, automated styling returns, and rental review scoring.
 
-## 1. Core System Architecture
-
-The frontend communicates with a cloud-hosted RESTful API built on Node.js/Express. State is synchronized using Redux Toolkit, and secure operations are maintained via short-lived JWT signatures and contextual routing rules.
-
-                  +-----------------------------------+
-                  |      React Application (SPA)      |
-                  +-----------------------------------+
-                                    |
-          +-------------------------+-------------------------+
-          |                                                   |
-          v                                                   v
-
-+-------------------+ +-------------------+
-| Public Context | | Private Context |
-+-------------------+ +-------------------+
-| - Home Page | | - User Profile |
-| - Authentication | | - Order Checkout |
-| - Wardrobe Browse | | - Admin Control |
-+-------------------+ +-------------------+
-| |
-+-------------------------+-------------------------+
-|
-v
-+-----------------------------------+
-| Axios HTTP Client Layer |
-+-----------------------------------+
-| (JWT Bearer Token)
-v
-+-----------------------------------+
-| Backend REST API |
-+-----------------------------------+
-
-## 2. Tech Stack & Engineering Tools
+## 1. Tech Stack & Engineering Tools
 
 Core Library: ReactJS (v18+)
 
@@ -48,7 +16,7 @@ Network layer: Axios (HTTP client featuring automatic request/response token int
 
 UI Framework: React-Bootstrap & Bootstrap 5 (Responsive flexbox grid layouts and components)
 
-## 3. Interface Design & Route Architecture
+## 2. Interface Design & Route Architecture
 
 The user interface maps directly across the following structured single-page application entry points:
 
@@ -78,37 +46,7 @@ Rental Auditing Logs: Full system transaction tracking for items currently on le
 
 Review Moderator: Content monitoring tools for customer feedback submissions.
 
-## 4. Codebase Directory Map
-
-Plaintext
-frontend/
-├── public/ # Static unmodified assets (icons, manifests)
-└── src/
-├── assets/ # Global stylistic and branding components
-│ ├── images/ # Image configurations and media banners
-│ └── styles/ # Overriding stylesheets and Bootstrap components
-├── components/ # Stateless, atomic UI modules
-│ ├── Button/ # Reusable customized action targets
-│ └── Header/ # Global navigation systems
-├── features/ # Domain-driven state management blocks
-│ ├── auth/ # Verification slices, tokens, and storage handlers
-│ ├── items/ # Wardrobe state matrices, filters, and records
-│ ├── rent/ # Rental transaction records and current lease histories
-│ └── review/ # User-generated scaling scores and content payloads
-├── hooks/ # Custom business logic hooks
-│ ├── useFetch.js # Declarative HTTP data fetching abstractions
-│ └── useForm.js # Form state encapsulation and handling
-├── pages/ # High-level route wrapper templates
-├── routes/ # Explicit application routing boundaries
-│ └── AppRoutes.js # Route gatekeeper configuration files
-├── services/ # Axios API core network abstraction layers
-│ └── api.js # Network interceptor initialization scripts
-├── utils/ # Reusable functional code snippets
-│ └── validatePassword.js
-├── App.jsx # Core UI context provider wrapper
-└── main.jsx # DOM mounting target script
-
-## 5. API Network Layer Contract
+## 3. API Network Layer Contract
 
 The client queries the underlying data model through the following strict REST architecture configurations:
 
@@ -127,7 +65,7 @@ Reviews POST /api/v1/review Dispatch rating value integers (1−5) & commentary 
 Reviews PATCH /api/v1/review/:id Modify visibility flag settings Admin Only
 Metrics GET /api/v1/admin/reports Returns overall analytic summaries Admin Only
 
-## 6. Client Security Implementations
+## 4. Client Security Implementations
 
 JWT Context State Isolation: Application access tokens are held in securely enclosed transient React memory pools. Persistent storage hooks leverage automated state token validation strategies against the /renew-jwt routing module to neutralize local cross-site scripting vulnerabilities.
 
@@ -135,7 +73,7 @@ Navigation Guard Rails: Route configuration wrappers process authentication cont
 
 Outbound Data Sanitization: Form interaction states are captured within controlled UI instances, executing strict length limitations and pattern validation schemas prior to dispatching network payloads.
 
-## 7. Local Environment Setup & Cloud Deployment
+## 5. Local Environment Setup & Cloud Deployment
 
 ### Local Setup Configuration
 
